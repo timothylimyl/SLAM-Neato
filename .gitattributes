@@ -1,0 +1,30 @@
+# Macros
+[attr]tabs      whitespace=trailing-space,space-before-tab,indent-with-non-tab,tabwidth=4
+[attr]spaces    whitespace=trailing-space,space-before-tab,tabs-in-indent,tabwidth=4
+# Default
+*       text=auto
+# LaTeX
+*.tex   text    spaces  diff=tex
+*.bib   text    tabs    diff=bibtex
+# Matlab
+*.m     text    spaces  diff=matlab
+*.mlx       -crlf -diff -merge
+*.mat       -crlf -diff -merge
+*.fig       -crlf -diff -merge
+*.p         -crlf -diff -merge
+*.slx       -crlf -diff -merge
+*.mdl       -crlf -diff -merge
+# Other binary files
+*.mdlp      -crlf -diff -merge
+*.slxp      -crlf -diff -merge
+*.sldd      -crlf -diff -merge
+*.mexa64    -crlf -diff -merge
+*.mexw64    -crlf -diff -merge
+*.mexmaci64 -crlf -diff -merge
+*.xlsx      -crlf -diff -merge
+*.docx      -crlf -diff -merge
+*.pdf       -crlf -diff -merge
+*.jpg       -crlf -diff -merge
+*.png       -crlf -diff -merge
+# git lfs
+*.iso   filter=lfs diff=lfs merge=lfs -text

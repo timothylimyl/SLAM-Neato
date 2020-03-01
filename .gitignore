@@ -1,0 +1,132 @@
+# Sublime Text
+*.sublime-workspace
+*.bak
+
+# Temporary merge files
+*.orig
+*.bak
+
+# MATLAB/Simulink temp files
+*.m~
+*.asv
+*.autosave
+
+# Simulink cache files
+*.slxc
+
+# Previous Simulink model versions
+*.mdl.r*a
+*.mdl.r*b
+*.slx.r*a
+*.slx.r*b
+
+# MATLAB/Simulink code generation   
+slprj/
+sccprj/
+codegen/
+
+# Compiled MATLAB binaries (mexmaci, mexmaci64, mexw32, mexw64, mexa64, etc.)
+*.mex*
+
+# Generated helpsearch folders
+helpsearch*/
+
+# Octave session info
+octave-workspace
+
+# Intermediate build files
+build/
+
+# Compiled object files
+*.slo
+*.lo
+*.o
+
+# Compiled dynamic libraries
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Compiled static libraries
+*.lib
+*.lai
+*.la
+*.a
+
+# Target binaries
+*.elf
+*.map
+
+# Executables
+*.exe
+*.out
+*.app
+
+# LaTeX outputs
+/doc/*.pdf
+!/doc/Figures/*.pdf
+/doc/Figures/*-eps-converted-to.pdf
+
+# LaTeX
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdy
+*.tdo
+.wisdom
+
+# Compressed files
+#   It's better to unpack these files and commit the raw source
+#   git has its own built-in compression methods
+*.7z
+*.dmg
+*.gz
+# *.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files
+*~
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
