@@ -1,56 +1,40 @@
-# MCHA4000 2020 group project template
+# Neato SLAM (University of Newcastle MCHA4000 Module, G6)
 
-## Getting started
+![intro](images/mapping.gif)
 
-Each group member should `clone` this repository to a local directory using your favourite git GUI (e.g., SourceTree) or at the command line
+## Introduction
+---
 
-    git clone https://bitbucket.org/uonmechatronics/MCHA4000_2020_G#.git
-    cd MCHA4000_2020_G#
+The goal of this project is to implement a Simultaneous Localisation and Mapping (SLAM) solution for a [NEATO Vacuum Cleaner Robot](https://www.neatorobotics.com/au/). The project goal was to SLAM algorithm can be implemented onto an on-board microcontroller
+in the Neato Robot via an interface with MATLAB code. This project was changed to a full simulation based project as access to the Neato Robot was hindered due to unforeseen circumstances caused by the global pandemic.
 
-where `#` is your group number.
-Cloning a git repository automatically configures it to use the repository it was cloned from as the remote called `origin`.
+What is SLAM? To understand SLAM, we have to understand localisation and mapping first. Localisation is figuring where in the world is the robot given a map while mapping is figuring out the map of the surrouding environment of the robot.
+SLAM deals with the problem of constructing a map of an unknown environment while simultaneously figuring out the location of the robot. If we do not have a map, how would we figure out the location of the robot (Localisation)? On the other hand,
+if we do not know where is the robot, how would we map the surrounding environment to begin with (Mapping)? This is why SLAM is commonly known as a chicken-and-egg problem. In order to solve the SLAM problem, we can alternate between localisation and mapping
+in search for the best estimation of the pose of the robot and map as time progress. This is usually done with the help of using many probabilistic approaches such as bayes filters which is use to
+update the probability of the location of the robot (states) as more information are made known. 
 
-Refer to the freely available [Pro Git eBook](https://git-scm.com/book) to familiarise yourself with using `git push` and `git pull` to work with the remote repo and collaborate with your other group members.
+The sensors used on the Neato Robot are encoders and Light Detection and Ranging (LIDAR). Encoders are used to calculate the number of rotation of the wheels while LIDAR sends out laser light and measuring the reflection of the laser 
+with a sensor to compute the distance ranges. It is worth noting that sensors are corrupted with noise due to internal hardware limitation and the changes in the surrounding environment such as a bump on the road or fiction changes.
+Therefore, probabilistic approaches are vital to ensure that information is consistently updated through time as a feedback mechanism as we can never fully trust sensor readings.
 
-## Notes
 
-Review the hidden `.gitignore` file(s) so that you know which file and folder patterns will not be committed. These typically include temporary files, intermediate build files and binary output files.
-If you need to change which files are ignored, see the [documentation here](https://git-scm.com/docs/gitignore).
+## Code Guide and explanation
+----
 
-**Write messages as if you are giving orders to the codebase to change its behaviour.**
-Remember that a commit is a set of instructions for how to go from a previous state to a new state.
-Each commit is an atomic transaction on the codebase that should represent a logically separate changeset that is labelled with a short message (typically less than 50 characters).
-Commit messages should be written in the *present-tense imperative*.
-For example, write "Fix bug", not "Fixed bug", "Fixes bug", "I fixed the bug" or "This patch fixes the bug" etc.
-This writing style makes it easier to `revert`, `rebase` or `cherry-pick` commits later if needed and ensures the messages still make sense when they are used outside their original context.
+The code guide section is divided into 3 main sections namely Mapping, Localisation, SLAM. Each section will have thoroughly explanation of the code involved and its location. Technical details will be shared too.
 
-**Organise your files logically.**
-For example, you might consider the following folder structure:
+### Mapping
 
-* `MCHA4000-2020-G#`
-    * `data/` (the contents are already `.gitignore`d)
-    * `doc/` (any documentation generated)
-    * `src/` (native source code)
-    * `matlab/` (Matlab source and Simulink models)
-    * `thirdparty/` (pristine copies of third party dependencies)
-    * `README.md` (this README file)
+### Localisation
 
-**Don't commit large files to the repository.**
-If you are using `git` correctly, your repository size should be significantly [less than 1GB](https://confluence.atlassian.com/bitbucket/what-kind-of-limits-do-you-have-on-repository-file-size-273877699.html).
-For comparison, the size of the entire Linux kernel git repository [is only 1.5GB](https://github.blog/2018-03-05-measuring-the-many-sizes-of-a-git-repository/), which includes 25 years of commit history made by thousands of developers.
-Presentation media (videos etc.) should be submitted with the presentation slides using Blackboard.
-If your project solution relies on a large input dataset (such as with machine vision or LiDAR data), keep it in the `/data` folder, which is already `.gitignore`d.
+### SLAM
 
-## Submission instructions
 
-1. Edit/update/replace this `README.md` with suitable instructions to run your solution.
-A reference to the basic Markdown syntax can be found [here](https://www.markdownguide.org/basic-syntax/).
 
-1. If your project solution relies on a large input dataset, submit this data separately using the project submission link on Blackboard, and include instructions in `README.md` to indicate that you solution relies on the data contained in this folder.
 
-1. Merge (or rebase) the work your wish to be assessed onto the `master` branch if you haven't already.
+## Dependencies
 
-1. Push the local `master` branch to the remote `origin/master` branch.
+As of 1st of July 2020, code successfully run on MATLAB R2019B with in-buiilt standard libraries. Author is not aware of any extra library needed. The only program necessary to run the whole code base is MATLAB.
 
-The commit that `origin/master` points to at the due date will considered as the submitted project code.
 
