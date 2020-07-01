@@ -5,7 +5,7 @@
 ## Introduction
 ---
 
-The goal of this project is to implement a Simultaneous Localisation and Mapping (SLAM) solution for a [NEATO Vacuum Cleaner Robot](https://www.neatorobotics.com/au/). The project goal was to SLAM algorithm can be implemented onto an on-board microcontroller
+The goal of this project is to implement a Simultaneous Localisation and Mapping (SLAM) solution for a [NEATO Vacuum Cleaner Robot](https://www.neatorobotics.com/au/). The initial project goal was to implement the SLAM algorithm onto an on-board microcontroller
 in the Neato Robot via an interface with MATLAB code. This project was changed to a full simulation based project as access to the Neato Robot was hindered due to unforeseen circumstances caused by the global pandemic.
 
 What is SLAM? To understand SLAM, we have to understand localisation and mapping first. Localisation is figuring where in the world is the robot given a map while mapping is figuring out the map of the surrouding environment of the robot.
@@ -22,7 +22,14 @@ Therefore, probabilistic approaches are vital to ensure that information is cons
 ## Code Guide and explanation
 ----
 
-The code guide section is divided into 3 main sections namely Mapping, Localisation, SLAM. Each section will have thoroughly explanation of the code involved and its location. Technical details will be shared too.
+The code guide section is divided into 4 main sections namely Data generation, Mapping, Localisation, SLAM. Each section will have thoroughly explanation of the code involved and its location. Technical details will be shared too.
+
+All the main scripts to run data generation, localisation, mapping and slam are all main\*.m files while the folders of functions contains the necessary auxiliaries scripts which path are added automatically in the main\*.m scripts.
+
+### Data Generation
+
+![data](images/data_generated.gif)
+
 
 ### Mapping
 
