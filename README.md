@@ -22,9 +22,9 @@ Therefore, probabilistic approaches are vital to ensure that information is cons
 ## Code Guide and explanation
 ----
 
-The code guide section is divided into 4 main sections namely Data generation, Mapping, Localisation, SLAM. Each section will have thoroughly explanation of the code involved and its location. Technical details will be shared too.
+The code guide section is divided into 4 main sections namely Data generation, Mapping with known poses, Localisation, SLAM. Each section will have thoroughly explanation of the code involved and its location. Technical details will be shared too.
 
-All the main scripts to run data generation, localisation, mapping and slam are all `main\*.m `files while the folders of functions contains the necessary auxiliaries scripts which path are added automatically in the `main\*.m` scripts.
+All the main scripts to run data generation, localisation, mapping and slam are all `main*.m `files while the folders of functions contains the necessary auxiliaries scripts which path are added automatically in the `main*.m` scripts.
 
 ### Data Generation
 
@@ -39,10 +39,35 @@ The robot goes around with manual velocity inputs being fed into the kinematic m
 into binary values by `mapplot_functions/loadMapFromImage.m`. It is important that the image is converted to a binary matrix representation then we can represent value 1 as occupied and 0 as unoccupied. The code is set up in a way where
 we have the flexibility to easily add obstacles, change the structure of the map and everything else will still run the same.
 
+The `init_functions` folder also consist of all of the necessary initialisation for lidar parameters (`getLidarParam.m`),map parameters (`getMapParam.m`), robot process model parameters (`getRobotParameters.m`) and occupancy grid (`initOccupancyGrid.m`).
 
-### Mapping
+
+### Mapping with known poses
+
+Mapping with known poses is a problem where the robot has to map its surrounding environment assuming that we know the precise location of the robot at every time step. This is usually impossible due to sensor noise as previously mentioned.
+However, the mapping algorithm used are exactly the same. Running `mainMapping.m` with move the robot around the map while mapping it. The mapping is using log-odds (good [reference](https://www.cs.cmu.edu/~16831-f14/notes/F14/16831_lecture06_agiri_dmcconac_kumarsha_nbhakta.pdf),
+implemented in `line 57 of mainMapping.m`. Auxiliary scripts for mapping can be found in the folder `mapping_functions`. 
+
+
+Firstly, we need to compute the end points location of the lidar measurements which is done in `mapping_functions/inverseLidarModel.m`. Then, use a line algorithm used to trace the ray from the starting point (location of robot)
+to the end points return by `inverseLidarModel.m`. Bresenham Line Algorithm `mapping_functions/bresenhamLineAlgo.m` was used.  `bresenhamLineAlgo.m` outputs a newly updated grid with probabilities of occupancy for individual cells that the
+line passes through (unoccupied) and where it ends/hits (occupied). Note that max ranges of lidar are filtered out as it is unnecessary risk in the case of this application as the lidar may return max range even if there is an obstacle 
+ahead of it due to sensor failure. `mapping_functions/plotInit.m` initialises the occupancy grid map while `mapping_functions/plotUpdate.m` updates the occupancy grid map in every iteration.
+
+Result of mapping algorithm can be seen in the comparison below:
+
+
+Actual Map                |  Map from algorithm   
+:-------------------------:|:-------------------------:|
+![map](images/map.jpg)   | ![mapalgo](images/mapalgo.jpg) 
+
+
+
+
 
 ### Localisation
+
+
 
 ### SLAM
 
