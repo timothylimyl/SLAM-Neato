@@ -24,11 +24,20 @@ Therefore, probabilistic approaches are vital to ensure that information is cons
 
 The code guide section is divided into 4 main sections namely Data generation, Mapping, Localisation, SLAM. Each section will have thoroughly explanation of the code involved and its location. Technical details will be shared too.
 
-All the main scripts to run data generation, localisation, mapping and slam are all main\*.m files while the folders of functions contains the necessary auxiliaries scripts which path are added automatically in the main\*.m scripts.
+All the main scripts to run data generation, localisation, mapping and slam are all `main\*.m `files while the folders of functions contains the necessary auxiliaries scripts which path are added automatically in the `main\*.m` scripts.
 
 ### Data Generation
 
+Running `mainDataGeneration.m` will simulate a robot moving around given map. The lidar is assume to be in the centre of rotation of the robot, raycasting allows us to compute lidar range measurements. It can be seen in the animation below that
+there are added noise into the lidar rays which is very important to simulate real lidar sensors. Lidar measurement noise was added by using a gaussian distribution on rays that hits obstacles,  potential short readings and random ranges
+was also added. Lidar simulation scripts can be found in folder `lidar_functions` which consist of `scanNE.c` for raycasting and `simulateNoisyLidarScan.m` for adding noise.
+
+
 ![data](images/data_generated.gif)
+
+The robot goes around with manual velocity inputs being fed into the kinematic model which can be found in `init_functions/robotDiscKinematics.m`. The map was done using the application Paint (free in-built Windows application) and converting
+into binary values by `mapplot_functions/loadMapFromImage.m`. It is important that the image is converted to a binary matrix representation then we can represent value 1 as occupied and 0 as unoccupied. The code is set up in a way where
+we have the flexibility to easily add obstacles, change the structure of the map and everything else will still run the same.
 
 
 ### Mapping
