@@ -41,6 +41,7 @@ we have the flexibility to easily add obstacles, change the structure of the map
 
 The `init_functions` folder also consist of all of the necessary initialisation for lidar parameters (`getLidarParam.m`),map parameters (`getMapParam.m`), robot process model parameters (`getRobotParameters.m`) and occupancy grid (`initOccupancyGrid.m`).
 
+The lidar ranges and states generated are stored as `.mat` files in the folder `data_generated`.
 
 ### Mapping with known poses
 
@@ -66,6 +67,33 @@ Actual Map                |  Map from algorithm
 
 
 ### Localisation
+
+#### Particle Filter
+
+Given the map, we need to figure out how to localise the robot (figure out where is the robot). At the initial few seconds, we have no clue on the initial position of the robot in the map, it could be anywhere that is unoccupied with any
+orientation. Therefore, to solve this problem commonly known as the "Kidnapped Vehicle Problem", we need an algorithm that does global localisation. This can be done using a Particle Filter. In the picture below, shows the random initialisation
+of particles distributed throughout the whole map using the function `localization_functions/globalParticles.m`. `globalParticles.m` only put particles in unoccupied cells of any map given to it.
+
+![pf](images/global_particles.jpg)
+
+The lidar likelihood model is set up in `localization_functions/lidarModel.m`, compute the log weights of every particle proposed. The particles are then resampled using the weights computed using the function `localization_functions/resampleSystematic.m`
+and applying effective resampling using the function `localization_functions/getNeff.m` which was recommended by a paper . 
+
+Run `mainLocalization_PF.m` to observe particle filter algorithm being run, animation to be expected:
+
+![ukf](images/PF_localization.gif)
+
+
+
+#### Unscented Kalman Filter (UKF)
+
+Run `mainUKFLocalization.m` to observe using UKF for localization. The main functions used to implement UKF is in the unscented transform for the measurement update and prediction step (`UnscentedTransform.m` and `UnscentedTransformUpdate.m`).
+`UnscentedTransformUpdate.m` uses `update.m` to update the lidar measurements by using the predicted pose (North,East,Yaw) in raycasting, the raycast readings are compared to the actual lidar measurements. Most of the time was spent tuning
+the measurement covariances (parameter R) and process noise (Q) to get the UKF to work. The value of Q and R was adjusted till the robot manages to go around the whole map as expected.
+
+![ukf](images/UKF_localization.gif)
+
+
 
 
 
