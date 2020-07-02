@@ -98,11 +98,18 @@ the measurement covariances (parameter R) and process noise (Q) to get the UKF t
 
 ### SLAM
 
+We combine the UKF localisation and mapping algorithm implementation together to solve the SLAM problem. We will alternate between localising and mapping.
+
 ##### UKF SLAM
 
+The UKF SLAM Algorithm requires a fair bit of tuning for the measurement (R) and process model (Q) covariances to ensure that the algorithm will work. The animation below shows
+what happens when the algorithm is not finely tuned. Once the localisation is off tracks, the mapping will follow suit (vice versa). 
 
 ![slam_fail](images/UKF_SLAM_trial.gif)
 
+Therefore, it is imperative that we tune Q and R by observing the robot motion and mapping. The animation shows what happens after tuning. It can be seen that
+it is still not perfect as the map is slighty off the ground truth map as it is very difficult to perfectly predict the robot poses at every time step while
+constructing a new map. 
 
 ![slam](images/UKF_SLAM_tuned.gif)
 
