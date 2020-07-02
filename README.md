@@ -76,7 +76,7 @@ of particles distributed throughout the whole map using the function `localizati
 
 ![pf](images/global_particles.jpg)
 
-The lidar likelihood model is set up in `localization_functions/lidarModel.m`, compute the log weights of every particle proposed. The particles are then resampled using the weights computed using the function `localization_functions/resampleSystematic.m`
+The lidar likelihood model is set up in `localization_functions/lidarModel.m`, this script compute the log weights of every particle proposed. The particles are then resampled using the weights computed using the function `localization_functions/resampleSystematic.m`
 and applying effective resampling using the function `localization_functions/getNeff.m` which was recommended by a paper . 
 
 Run `mainLocalization_PF.m` to observe particle filter algorithm being run, animation to be expected:
@@ -88,7 +88,7 @@ Run `mainLocalization_PF.m` to observe particle filter algorithm being run, anim
 #### Unscented Kalman Filter (UKF)
 
 Run `mainUKFLocalization.m` to observe using UKF for localization. The main functions used to implement UKF is in the unscented transform for the measurement update and prediction step (`UnscentedTransform.m` and `UnscentedTransformUpdate.m`).
-`UnscentedTransformUpdate.m` uses `update.m` to update the lidar measurements by using the predicted pose (North,East,Yaw) in raycasting, the raycast readings are compared to the actual lidar measurements. Most of the time was spent tuning
+`UnscentedTransformUpdate.m` uses `update.m` to update the lidar measurements by using the predicted pose (North,East,Yaw) in raycasting (`scanNE.c`), the raycast readings are compared to the actual lidar measurements. Most of the time was spent tuning
 the measurement covariances (parameter R) and process noise (Q) to get the UKF to work. The value of Q and R was adjusted till the robot manages to go around the whole map as expected.
 
 ![ukf](images/UKF_localization.gif)
@@ -96,14 +96,21 @@ the measurement covariances (parameter R) and process noise (Q) to get the UKF t
 
 
 
-
 ### SLAM
 
 
+![slam_fail](images/UKF_SLAM_trial.gif)
+
+
+![slam](images/UKF_SLAM_tuned.gif)
 
 
 ## Dependencies
 
-As of 1st of July 2020, code successfully run on MATLAB R2019B with in-buiilt standard libraries. Author is not aware of any extra library needed. The only program necessary to run the whole code base is MATLAB.
+As of 1st of July 2020, code successfully run on MATLAB R2019B with in-built standard libraries. Author is not aware of any extra library needed. The only program necessary to run the whole code base is MATLAB.
+
+
+## Extras
+
 
 
