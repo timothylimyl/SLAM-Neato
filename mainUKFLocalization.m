@@ -50,7 +50,7 @@ muf = zeros(n,N);
 
 %setup initial state PDF
 mup(:,1)    = [1.5; 2; pi/2];
-Pp(:,:,1)   = 0.01*eye(n);
+Pp(:,:,1)   = 0.001*eye(n);
 
 
 
@@ -93,8 +93,7 @@ for t=1:N-1
     mup(:,t+1)  = mu(n+1:end);
     Pp(:,:,t+1) = P(n+1:end,n+1:end);
 
-
-    
+ 
     
 end  
 

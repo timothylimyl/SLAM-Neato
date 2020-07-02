@@ -25,14 +25,13 @@ param = getRobotParameters();
 lidar = getLidarParam();
 
 
-n  = 3; % number of states
+n  = 3;              % number of states
 nm = lidar.numScans; % number of measurements
-
-N = length(v); % time length
+N = length(v);       % time length
 
 % R and Q is tune to make it go the expected trajectory.
-R = 10*eye(nm);
-Q = 1e-4*diag([1,1,0.1]);
+R = 55*eye(nm);
+Q = 1e-4*diag([0.1,0.1,0.01]);
 
 %Make some room for the filter
 Pp  = zeros(n,n,N+1);
@@ -58,6 +57,13 @@ new_map         = initOccupancyGrid(); % Extra grid used as new map every iterat
 logP = 0;
 ProbMap = z; % Temporary map (Updates every iteration for localisation)
 
+
+writerObj           = VideoWriter('UKFSLAMtuned.mp4','MPEG-4');
+writerObj.FrameRate = 10;
+
+% Open the video writer
+open(writerObj);
+
 for t=1:N-1
     
     delete(rh);
@@ -67,14 +73,14 @@ for t=1:N-1
   
     % Varying covariance involve with lidar measurements: 
     % Finding the index of max ranges from lidar measurement:
-    logic_maxRange =  lidarRanges(:,t) > lidar.maxRange-0.5;
+    logic_maxRange =  lidarRanges(:,t) > lidar.maxRange-1;
     id_maxRange = find(logic_maxRange == 1) ;
     
     % Changing covariances on max ranges:
     for index = 1:length(id_maxRange)
         % When max range is detected, increase R as it the measurement is
         % less "trustable".
-        R(id_maxRange(index),id_maxRange(index)) = 10; % More Noisy (high R)
+        R(id_maxRange(index),id_maxRange(index)) = 130; % More Noisy (high R)
         
     end
     
@@ -115,7 +121,8 @@ for t=1:N-1
    
     % Update occupancy grid map as map grows
     plotUpdate(Fnc,ProbMap);
-    
+    F = getframe(gcf) ;
+    writeVideo(writerObj, F);
     
     %Predict forward
     pred = @(x) [x(1:n); robotDiscKinematics(x(1:n),v(:,t),param) + x(n+1:end)];
@@ -126,10 +133,11 @@ for t=1:N-1
 
 
     
-    
 end  
 
 
+close(writerObj);
+fprintf('Video generated\n');  
 
 
 
