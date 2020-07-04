@@ -56,13 +56,13 @@ new_map         = initOccupancyGrid(); % Extra grid used as new map every iterat
 % intiliase log-odds:
 logP = 0;
 ProbMap = z; % Temporary map (Updates every iteration for localisation)
-
-
-writerObj           = VideoWriter('UKFSLAMtuned.mp4','MPEG-4');
-writerObj.FrameRate = 10;
+% 
+% 
+% writerObj           = VideoWriter('UKFSLAMtuned.mp4','MPEG-4');
+% writerObj.FrameRate = 10;
 
 % Open the video writer
-open(writerObj);
+% open(writerObj);
 
 for t=1:N-1
     
@@ -136,8 +136,8 @@ for t=1:N-1
 end  
 
 
-close(writerObj);
-fprintf('Video generated\n');  
+% close(writerObj);
+% fprintf('Video generated\n');  
 
 
 

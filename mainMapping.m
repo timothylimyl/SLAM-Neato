@@ -5,7 +5,8 @@ clc;
 
 addpath('mapplot_functions');
 addpath('mapping_functions'); % all of the necessary functions do mapping with known poses
-addpath('generatedData')
+addpath('generatedData');
+addpath('init_functions');
 
 % Data generated given by mainDataGeneration.m
 load('lidarOutput.mat'); %  Lidar ranges (simulated with noise)
