@@ -121,8 +121,8 @@ for t=1:N-1
    
     % Update occupancy grid map as map grows
     plotUpdate(Fnc,ProbMap);
-    F = getframe(gcf) ;
-    writeVideo(writerObj, F);
+%     F = getframe(gcf) ;
+%     writeVideo(writerObj, F);
     
     %Predict forward
     pred = @(x) [x(1:n); robotDiscKinematics(x(1:n),v(:,t),param) + x(n+1:end)];
