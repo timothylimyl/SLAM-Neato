@@ -34,7 +34,7 @@ All the main scripts to run data generation, localisation, mapping and slam are 
 ### Data Generation
 
 Running `mainDataGeneration.m` will simulate a robot moving around given map. The lidar is assume to be in the centre of rotation of the robot. Raycasting allows us to compute lidar range measurements from a given map. It can be seen in the animation below that
-there are added noise into the lidar rays which is very important to simulate real lidar sensors. Lidar measurement noise was added by using a gaussian distribution on rays that hits obstacles, chance for potential short readings and random ranges
+there are added noise into the lidar rays which is very important to simulate real lidar sensors. Lidar measurement noise was added by using a gaussian distribution on rays that hits obstacles, chance for potential short readings and random background noise
 was also added. Lidar simulation scripts can be found in folder `lidar_functions` which consist of `scanNE.c` for raycasting and `simulateNoisyLidarScan.m` for adding noise to lidar ranges.
 
 
