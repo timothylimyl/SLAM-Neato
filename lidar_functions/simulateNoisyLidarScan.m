@@ -17,7 +17,7 @@ for i=1:lidar.numScans
         
     % 1/100 chance to read random range
     elseif randChance(i) <= 3
-        lidarNoisyScan0(i) = lidar.maxRange*rand;
+        lidarNoisyScan0(i) = lidarNoisyScan0(i) + 0.01*randn;
         
     % 5/100 chance to read short range
     elseif randChance(i) <= 6
