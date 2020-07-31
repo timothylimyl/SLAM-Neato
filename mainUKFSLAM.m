@@ -30,8 +30,8 @@ nm = lidar.numScans; % number of measurements
 N = length(v);       % time length
 
 % R and Q is tune to make it go the expected trajectory.
-R = 55*eye(nm);
-Q = 1e-4*diag([0.1,0.1,0.01]);
+R = 70*eye(nm);
+Q = 1e-4*diag([0.1,0.1,0.001]);
 
 %Make some room for the filter
 Pp  = zeros(n,n,N+1);
@@ -41,7 +41,7 @@ muf = zeros(n,N);
 
 %setup initial state PDF
 mup(:,1)    = [1.5; 2; pi/2];
-Pp(:,:,1)   = 0.001*eye(n);
+Pp(:,:,1)   = 0.01*eye(n);
 
 rh = [];
 
@@ -66,8 +66,8 @@ ProbMap = z; % Temporary map (Updates every iteration for localisation)
 
 for t=1:N-1
     
-    delete(rh);
-    rh = drawRobot(mup(:,1:t));
+    %delete(rh);
+    %rh = drawRobot(mup(:,1:t));
     
 
   
@@ -80,7 +80,7 @@ for t=1:N-1
     for index = 1:length(id_maxRange)
         % When max range is detected, increase R as it the measurement is
         % less "trustable".
-        R(id_maxRange(index),id_maxRange(index)) = 130; % More Noisy (high R)
+        R(id_maxRange(index),id_maxRange(index)) = 80; % More Noisy (high R)
         
     end
     
@@ -120,7 +120,7 @@ for t=1:N-1
     ProbMap = 1./(1+exp(-logP));
    
     % Update occupancy grid map as map grows
-    plotUpdate(Fnc,ProbMap);
+    %plotUpdate(Fnc,ProbMap);
 %     F = getframe(gcf) ;
 %     writeVideo(writerObj, F);
     
