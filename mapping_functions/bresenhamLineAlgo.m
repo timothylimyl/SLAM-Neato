@@ -2,7 +2,10 @@ function new_grid =  bresenhamLineAlgo(grid,pose,xe,ye)
 
 pixeldim = grid.Deast;  % assumption that grid is square
 
-ep       = 3.5e-1; % probability of unoccupied when ray passes.
+Poccupied   = 0.8;
+Punoccupied = 0.65;
+
+ep       = 1 - Punoccupied; % probability of unoccupied when ray passes.
 
 %Loop through all of the points hit by LiDAR available:
 for i = 1:length(xe)
@@ -29,11 +32,11 @@ for i = 1:length(xe)
     % color the end point (HIT) (OCCUPIED)
     % inverseModel)- at the end of all points, change idx points to 0.
     
-    grid.Z(y(2),x(2)) = 1 - ep;   
+    grid.Z(y(2),x(2)) = Poccupied;   
     
     % uncolor point that robot is on (If you are on it, it is unoccupied by
     % obstacles.
-    grid.Z(y(1),x(1)) = 1 - ep;
+    grid.Z(y(1),x(1)) = ep;
     
     
 %%%%%%%%%%%%%%%%%% Setup deals with all slopes (360)  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
