@@ -1,4 +1,4 @@
-# Neato SLAM (University of Newcastle MCHA4000 Module, G6)
+# Neato SLAM
 
 ![intro](images/mapping.gif)
 
